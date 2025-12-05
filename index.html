@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Quarterly Earnings — Reveal.js</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Reveal core (CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/theme/black.css" id="theme">
+
+  <!-- Highlight.js (syntax highlighting) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+
+  <!-- KaTeX (math) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+
+  <style>
+    /* small custom styling */
+    .email { font-size: 0.9rem; opacity: 0.95; }
+    .key-metrics { font-weight: 600; font-size: 1.2rem; }
+    pre code { font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Title slide -->
+      <section>
+        <h1>Quarterly Earnings Report</h1>
+        <p class="email">Contact: 24f3000719@ds.study.iitm.ac.in</p>
+        <p>Technical Consultant — Financial Institution</p>
+        <aside class="notes">
+          Welcome stakeholders. Briefly introduce yourself and note that the detailed figures are in the appendix.
+        </aside>
+      </section>
+
+      <!-- Markdown slide (uses data-markdown plugin) -->
+      <section data-markdown>
+        <textarea data-template>
+## Executive Summary (Markdown slide)
+
+- **Revenue:** Strong sequential growth.
+- **Expenses:** Controlled; margin expansion observed.
+- **Outlook:** Reaffirm guidance for the year.
+
+*Animated bullets below will appear one-by-one.*
+        </textarea>
+        <aside class="notes">
+          Read each bullet slowly. Emphasize margin improvement and guidance reaffirmation.
+        </aside>
+      </section>
+
+      <!-- Slide with fragments (animated elements) -->
+      <section>
+        <h2>Key Metrics</h2>
+        <ul>
+          <li class="fragment">Revenue growth: <span class="key-metrics">+8.2% QoQ</span></li>
+          <li class="fragment">Net Profit: <span class="key-metrics">₹1.2B</span></li>
+          <li class="fragment">EBITDA Margin: <span class="key-metrics">18.5%</span></li>
+        </ul>
+        <aside class="notes">
+          Use the presenter view to show this slide while narrating each metric as it appears.
+        </aside>
+      </section>
+
+      <!-- Code sample with syntax highlighting -->
+      <section>
+        <h2>Sample: Simple ROI Calculation (Code)</h2>
+        <pre><code class="language-javascript">
+// ROI = (Gain - Cost) / Cost
+function roi(gain, cost) {
+  return (gain - cost) / cost;
+}
+
+// Example
+console.log(roi(1200000, 1000000)); // 0.2 => 20%
+        </code></pre>
+        <aside class="notes">
+          Explain how ROI is used as a quick sanity check for project returns.
+        </aside>
+      </section>
+
+      <!-- Math slide (NPV example using KaTeX math) -->
+      <section>
+        <h2>Financial Formula (NPV)</h2>
+        <p>
+          Present Net Present Value (NPV):
+        </p>
+        <p>
+          \( \mathrm{NPV} = \sum_{t=0}^{T} \dfrac{C_t}{(1+r)^t} \)
+        </p>
+        <p class="fragment">Where \(C_t\) = cashflow at time \(t\), \(r\) = discount rate.</p>
+        <aside class="notes">
+          Walk through a short example: small negative at \(t=0\) (investment) then positive cashflows.
+        </aside>
+      </section>
+
+      <!-- Slide showing instructions / appendix -->
+      <section>
+        <h2>Appendix & Next Steps</h2>
+        <ol>
+          <li class="fragment">Share detailed report PDF post-call.</li>
+          <li class="fragment">Schedule deep-dive with product teams.</li>
+          <li class="fragment">Follow-up on key drivers of revenue improvement.</li>
+        </ol>
+        <aside class="notes">
+          Close with next steps; invite questions.
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js and plugins -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+
+  <!-- Plugins -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/markdown/markdown.esm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/highlight/highlight.esm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/math/math.esm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/notes/notes.esm.js"></script>
+
+  <!-- highlight.js fallback (for some browsers) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+  <script>
+    // Initialize Reveal
+    Reveal.initialize({
+      hash: true,
+      plugins: [ RevealMarkdown, RevealHighlight, RevealMath, RevealNotes ],
+      math: {
+        // use KaTeX via plugin
+        katex: {
+          // options can be provided here if needed
+        }
+      },
+      // Show controls and progress
+      controls: true,
+      progress: true,
+      slideNumber: true
+    });
+
+    // Ensure highlight.js runs on legacy browsers
+    document.addEventListener('DOMContentLoaded', (event) => {
+      if (window.hljs) {
+        document.querySelectorAll('pre code').forEach((block) => {
+          hljs.highlightBlock(block);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
