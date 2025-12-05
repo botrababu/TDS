@@ -1,132 +1,86 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>TDS Presentation</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <title>TDS — RevealJS (Fixed)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Reveal.js core CSS -->
+  <!-- Reveal core CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/theme/black.css" id="theme">
 
-  <!-- Highlight.js -->
+  <!-- highlight.js (non-ESM; safe to include as classic script) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
 
-  <!-- KaTeX (math) -->
+  <!-- KaTeX for math rendering -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
 
   <style>
-    .email { font-size: 0.9rem; opacity: 0.9; margin-top: 10px; }
+    .email { font-size: 0.95rem; margin-top: 8px; opacity: 0.95; }
   </style>
 </head>
-
 <body>
-<div class="reveal">
-  <div class="slides">
+  <div class="reveal">
+    <div class="slides">
 
-    <!-- TITLE SLIDE -->
-    <section>
-      <h1>TDS Quarterly Earnings Report</h1>
-      <p class="email">Contact: 24f3000719@ds.study.iitm.ac.in</p>
+      <section>
+        <h1>TDS Quarterly — Fixed</h1>
+        <p class="email">Contact: 24f3000719@ds.study.iitm.ac.in</p>
+        <aside class="notes">Intro note.</aside>
+      </section>
 
-      <aside class="notes">
-        Welcome everyone. This presentation covers quarterly performance, metrics,
-        and expected outlook.
-      </aside>
-    </section>
-
-    <!-- MARKDOWN SLIDE -->
-    <section data-markdown>
+      <section data-markdown>
 <textarea data-template>
-## Executive Summary
+## Markdown Slide
 
-- **Revenue Growth:** Steady improvement across segments  
-- **Operating Margin:** Expanded QoQ  
-- **Forecast:** Positive outlook  
-
-This slide is written using **Markdown**.
+- Item one
+- Item two
 </textarea>
+        <aside class="notes">Explain the markdown items.</aside>
+      </section>
 
-      <aside class="notes">
-        Explain that this content is pulled from Markdown.
-      </aside>
-    </section>
+      <section>
+        <h2>Code Example</h2>
+        <pre><code class="language-javascript">
+// ROI example
+function roi(gain, cost) { return (gain - cost) / cost; }
+console.log(roi(1200000, 1000000));
+        </code></pre>
+      </section>
 
-    <!-- SLIDE WITH FRAGMENTS -->
-    <section>
-      <h2>Key Metrics</h2>
-      <ul>
-        <li class="fragment">Revenue Growth: **8.2% QoQ**</li>
-        <li class="fragment">Net Profit: **₹1.2B**</li>
-        <li class="fragment">EBITDA Margin: **18.5%**</li>
-      </ul>
+      <section>
+        <h2>NPV</h2>
+        <p>\( \mathrm{NPV} = \sum_{t=0}^{T} \dfrac{C_t}{(1+r)^t} \)</p>
+      </section>
 
-      <aside class="notes">
-        Each bullet appears sequentially using Reveal.js fragments.
-      </aside>
-    </section>
-
-    <!-- CODE BLOCK -->
-    <section>
-      <h2>ROI Code Example</h2>
-      <pre><code class="language-javascript">
-// ROI = (Gain - Cost) / Cost
-function roi(gain, cost) {
-  return (gain - cost) / cost;
-}
-
-console.log( roi(1200000, 1000000) ); // 0.2 => 20%
-      </code></pre>
-
-      <aside class="notes">
-        Code highlighting is powered by highlight.js.
-      </aside>
-    </section>
-
-    <!-- MATH FORMULA -->
-    <section>
-      <h2>Financial Formula (NPV)</h2>
-
-      <p>
-        \( \text{NPV} = \sum_{t=0}^{T} \frac{C_t}{(1+r)^t} \)
-      </p>
-
-      <p class="fragment">This represents discounted cash flow over time.</p>
-
-      <aside class="notes">
-        Explain what each parameter represents.
-      </aside>
-    </section>
-
+    </div>
   </div>
-</div>
 
-<!-- REVEAL + PLUGINS (ES MODULES) -->
-<script type="module">
-  import Reveal from "https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.esm.js";
-  import RevealMarkdown from "https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/markdown/markdown.esm.js";
-  import RevealHighlight from "https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/highlight/highlight.esm.js";
-  import RevealMath from "https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/math/math.esm.js";
-  import RevealNotes from "https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/notes/notes.esm.js";
+  <!-- highlight.js classic script (fallback) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
 
-  Reveal.initialize({
-    hash: true,
-    slideNumber: true,
-    controls: true,
-    progress: true,
+  <!-- IMPORTANT: Only one module script that imports Reveal + ESM plugins -->
+  <script type="module">
+    import Reveal from "https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.esm.js";
+    import RevealMarkdown from "https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/markdown/markdown.esm.js";
+    import RevealHighlight from "https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/highlight/highlight.esm.js";
+    import RevealMath from "https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/math/math.esm.js";
+    import RevealNotes from "https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/notes/notes.esm.js";
 
-    plugins: [RevealMarkdown, RevealHighlight, RevealMath, RevealNotes],
+    Reveal.initialize({
+      hash: true,
+      controls: true,
+      progress: true,
+      slideNumber: true,
+      plugins: [ RevealMarkdown, RevealHighlight, RevealMath, RevealNotes ],
+      math: { katex: {} }
+    });
 
-    math: {
-      katex: {
-        // KaTeX options
-      }
+    // Ensure highlight.js runs on pre/code blocks (if present)
+    if (window.hljs && typeof hljs.highlightAll === "function") {
+      hljs.highlightAll();
     }
-  });
-</script>
-
-<!-- Optional highlight.js fallback -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  </script>
 
 </body>
 </html>
