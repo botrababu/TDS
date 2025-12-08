@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Employee Department Visualization</title>
+  <meta name="author" content="24f3000719@ds.study.iitm.ac.in">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin: 24px; background: #fff; color:#111; }
+    .container { max-width:900px; margin: auto; }
+    header { display:flex; justify-content:space-between; align-items:center; gap:16px; }
+    h1 { margin:0 0 8px 0; font-size:1.4rem; }
+    .meta { color:#444; font-size:0.95rem; }
+    .card { background:#fafafa; border:1px solid #eee; padding:14px; margin-top:14px; border-radius:8px; }
+    canvas { width:100% !important; height:auto !important; }
+    .grid { display:grid; grid-template-columns: 1fr 320px; gap:18px; align-items:start; }
+    @media (max-width:760px){ .grid{ grid-template-columns: 1fr; } }
+    .small { font-size:0.95rem; color:#333; margin:6px 0; }
+    .badge { display:inline-block; padding:6px 10px; background:#eef9ff; color:#005a9c; border-radius:6px; font-weight:600; }
+  </style>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Employee Department Distribution</h1>
+        <div class="meta">Verification email: <strong>24f3000719@ds.study.iitm.ac.in</strong></div>
+      </div>
+      <div class="meta" style="text-align:right">
+        <div class="small">Generated: <time id="ts"></time></div>
+        <div class="small">Source: synthetic sample (100 rows)</div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <canvas id="deptChart" width="700" height="420"></canvas>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-top:0">Statistics</h3>
+        <div id="rdCount" class="small">R&amp;D Frequency: <span class="badge">--</span></div>
+        <div id="deptTable" class="small" style="margin-top:12px"></div>
+        <div style="margin-top:14px; font-size:0.9rem; color:#555">
+          <strong>Notes:</strong>
+          <ul style="margin:8px 0 0 18px">
+            <li>Departments include Finance, Operations, HR, Marketing, R&amp;D, Sales.</li>
+            <li>Counts shown are from the embedded synthetic dataset.</li>
+            <li>To publish: create repo, add this file as <code>employee_viz.html</code>, commit to <code>main</code>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px; color:#666; font-size:0.9rem;">
+      <strong>How to publish</strong>: Create a public GitHub repo (e.g., <code>employee-performance-viz</code>), add this file as <code>employee_viz.html</code>, commit to the main branch. The raw URL will be:
+      <pre style="background:#f7f7f7;padding:8px;border-radius:6px">https://raw.githubusercontent.com/&lt;YOUR_USERNAME&gt;/employee-performance-viz/main/employee_viz.html</pre>
+    </div>
+  </div>
+
+<script>
+/*
+  Embedded synthetic dataset (100 records).
+  The script computes R&D frequency and renders a Chart.js bar chart showing department counts.
+*/
+const employees = (function gen(){
+  // I'll create a reproducible pseudo-random sample here:
+  const depts = ["Finance","Operations","HR","Marketing","R&D","Sales"];
+  const regions = ["Asia Pacific","Latin America","Middle East","Europe","North America"];
+  const rows = [];
+  let seed = 42;
+  function rand() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+  for(let i=1;i<=100;i++){
+    const dept = depts[Math.floor(rand()*depts.length)];
+    const region = regions[Math.floor(rand()*regions.length)];
+    const performance = Math.round((65 + rand()*20) * 100)/100;
+    const years = Math.max(0, Math.round((rand()*10 + rand()*3)));
+    const sat = Math.round((Math.min(5, Math.max(1, 3.5 + (rand()-0.5))) ) * 100)/100;
+    rows.push({
+      employee_id: "EMP" + String(i).padStart(3,"0"),
+      department: dept,
+      region: region,
+      performance_score: performance,
+      years_experience: years,
+      satisfaction_rating: sat
+    });
+  }
+  return rows;
+})();
+
+// compute counts
+const counts = employees.reduce((acc, r) => {
+  acc[r.department] = (acc[r.department]||0) + 1;
+  return acc;
+}, {});
+
+// make ordered arrays for chart (stable ordering)
+const labels = Object.keys(counts).sort(); // alphabetical
+const data = labels.map(l => counts[l] || 0);
+
+// compute R&D count (case-insensitive)
+const rdCount = employees.filter(r => (r.department||"").toLowerCase() === "r&d").length;
+document.getElementById("rdCount").querySelector(".badge").textContent = rdCount;
+
+// populate department table
+const tableDiv = document.getElementById("deptTable");
+let tableHtml = "<strong>Department counts</strong><br><table style='border-collapse:collapse;margin-top:6px'>";
+for(const lab of labels){
+  tableHtml += `<tr><td style="padding:4px 8px;border-bottom:1px solid #f0f0f0">${lab}</td><td style="padding:4px 8px;border-bottom:1px solid #f0f0f0"><strong>${counts[lab]}</strong></td></tr>`;
+}
+tableHtml += "</table>";
+tableDiv.innerHTML = tableHtml;
+
+// Render Chart.js bar chart
+const ctx = document.getElementById("deptChart").getContext("2d");
+const chart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: labels,
+    datasets: [{
+      label: 'Employee count',
+      data: data,
+      backgroundColor: ['#1f77b4','#ff7f0e','#2ca02c','#d62728','#9467bd','#8c564b'],
+      borderColor: '#ffffff',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display:false },
+      tooltip: { mode:'index', intersect:false }
+    },
+    scales: {
+      x: { ticks: { color:'#222' } },
+      y: { beginAtZero:true, ticks: { stepSize: 5, color:'#222' } }
+    }
+  }
+});
+
+// timestamp
+document.getElementById("ts").textContent = new Date().toLocaleString();
+</script>
+</body>
+</html>
