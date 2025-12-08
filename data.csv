@@ -1,0 +1,19 @@
+department,level,salary
+Engineering,Executive,195000
+Engineering,Senior,145000
+Engineering,Mid,115000
+Engineering,Junior,88000
+Sales,Executive,170000
+Sales,Senior,125000
+Sales,Mid,92000
+Sales,Junior,61000
+Marketing,Executive,160000
+Marketing,Senior,110000
+Marketing,Mid,82000
+HR,Senior,98000
+HR,Mid,72000
+Finance,Executive,180000
+Finance,Mid,105000
+Finance,Junior,70000
+Customer Support,Junior,52000
+Customer Support,Mid,64000
