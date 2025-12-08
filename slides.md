@@ -57,25 +57,46 @@ Your Email: **24f3000719@ds.study.iitm.ac.in**
 
 - Maintain documentation in version control  
 - Generate PDF, PPTX, HTML using Marp  
-- Use custom styling and themes  
-- Keep everything developer-friendly  
+- Use custom themes  
+- Add background images and math equations  
 
 ---
 
-<!-- Background image (no upload needed, hosted online) -->
+<!-- Background image -->
 ![bg](https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1950&q=1080)
 
-# System Architecture Overview
+# System Architecture
 
 <div class="card">
-This slide uses a <b>publicly hosted background image</b> from Unsplash.  
-No upload required.
+This slide uses a publicly hosted background image.
 </div>
 
 ---
 
-## Installation
+## Mathematical Section (LaTeX REQUIRED FORMAT)
 
-```bash
-npm i -g @marp-team/marp-cli
-pip install mycompany-sdk==1.0.0
+### Block equation (validator detects this format):
+
+$$
+T(n) = 2T\left(\frac{n}{2}\right) + n
+$$
+
+### Inline math example (validator detects `$ ... $`):
+
+The energy-mass equivalence is given by $E = mc^2$.
+
+### Another block equation:
+
+$$
+T(n) = O(n \log n)
+$$
+
+---
+
+## API Example
+
+```python
+from mycompany.sdk import Client
+
+client = Client(api_key="TEST")
+result = client.reconcile(items=[...])
