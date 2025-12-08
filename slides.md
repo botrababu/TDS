@@ -56,20 +56,20 @@ Your Email: **24f3000719@ds.study.iitm.ac.in**
 ## Project Goals
 
 - Maintain documentation in version control  
-- Generate PDF, PPTX, HTML from the same source  
-- Use Marp for developer-friendly presentations  
-- CI-friendly documentation pipeline  
+- Generate PDF, PPTX, HTML using Marp  
+- Use custom styling and themes  
+- Keep everything developer-friendly  
 
 ---
 
-<!-- Background image slide -->
-![bg](https://raw.githubusercontent.com/botrababu/TDS/main/assets/bg.jpg)
+<!-- Background image (no upload needed, hosted online) -->
+![bg](https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1950&q=1080)
 
 # System Architecture Overview
 
 <div class="card">
-This slide uses a **background image** stored in the repository.  
-Path: <code>assets/bg.jpg</code>
+This slide uses a <b>publicly hosted background image</b> from Unsplash.  
+No upload required.
 </div>
 
 ---
