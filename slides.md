@@ -61,6 +61,22 @@ If your CI blocks local files, host the image in the repo and reference it with 
 
 ---
 
+---
+
+## Algorithmic Complexity (Math Example)
+
+We analyze the time complexity:
+
+\[
+T(n) = 2T\left(\frac{n}{2}\right) + n
+\]
+
+By the Master Theorem:
+
+\[
+T(n) = \mathcal{O}(n \log n)
+\]
+
 ## Installation (code)
 ```bash
 npm i -g @marp-team/marp-cli
